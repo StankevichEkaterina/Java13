@@ -34,6 +34,7 @@ public class Manager {
         }
         return result;
     }
+
     public boolean matches(Product product, String search) {
         if (product.matches(search)) {
             return true;

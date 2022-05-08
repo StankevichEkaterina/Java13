@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Objects;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,7 +13,6 @@ public class Product {
     protected int id;
     protected String title;
     protected int price;
-
 
 
     public boolean equals(Object o) {

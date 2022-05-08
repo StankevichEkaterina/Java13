@@ -25,6 +25,7 @@ class RepositoryTest {
         assertArrayEquals(expected, actual);
     }
 
+
     @Test
     public void shouldSaveAnotherProduct() {
         Product[] product = new Product[]{Book1, Smartphone3};
@@ -75,4 +76,33 @@ class RepositoryTest {
         Product[] actual = repo.findAll();
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldAddingProductWithAnExistingID() {
+        repo.saveID(Book1, 1);
+        repo.saveID(Smartphone2, 15);
+        assertThrows(AlreadyExistsException.class, () -> {
+            repo.saveID(Book1, 1);
+        });
+    }
+
+    @Test
+    public void shouldAddingProductWithAnAlreadyAddedID() {
+        Product[] product = new Product[]{Book1, Smartphone3};
+        repo.setProducts(product);
+        assertThrows(AlreadyExistsException.class, () -> {
+            repo.saveID(Book1, 1);
+        });
+    }
+
+
+    @Test
+    public void shouldAddingProductWithNewID() {
+        repo.saveID(Book1, 1);
+        repo.saveID(Smartphone2, 15);
+        Product[] expected = {Book1, Smartphone2};
+        Product[] actual = repo.findAll();
+        assertArrayEquals(expected, actual);
+    }
+
 }

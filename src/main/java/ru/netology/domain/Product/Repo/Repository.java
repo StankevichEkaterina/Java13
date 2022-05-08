@@ -14,7 +14,6 @@ public class Repository {
     protected Product[] products = new Product[]{
     };
 
-
     public Product[] getProducts() {
         return products;
     }
@@ -23,8 +22,11 @@ public class Repository {
         this.products = products;
     }
 
+
     public void save(Product product) {
+
         Product[] newProduct = new Product[products.length + 1];
+
         for (int i = 0; i < products.length; i++) {
             newProduct[i] = products[i];
         }
@@ -60,4 +62,24 @@ public class Repository {
         products = newProduct;
         return products;
     }
+
+    public void saveID(Product product, int id) {
+
+        if (findById(id) == product) {
+            throw new AlreadyExistsException("Продукт с данным id уже существует: " + id);
+        }
+
+        Product[] newProduct = new Product[products.length + 1];
+
+        for (int i = 0; i < products.length; i++) {
+            newProduct[i] = products[i];
+        }
+        newProduct[newProduct.length - 1] = product;
+        products = newProduct;
+    }
+
+
 }
+
+
+
